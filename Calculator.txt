@@ -1,0 +1,115 @@
+// Calculator.js
+import React, { useState } from "react";
+
+const buttonStyle = {
+  background: "#2196f3",
+  color: "#fff",
+  fontSize: "2rem",
+  border: "none",
+  borderRadius: "10px",
+  width: "60px",
+  height: "60px",
+  margin: "10px",
+  cursor: "pointer",
+};
+
+const inputStyle = {
+  fontSize: "2rem",
+  width: "300px",
+  height: "60px",
+  margin: "20px",
+  borderRadius: "10px",
+  border: "2px solid #333",
+  textAlign: "center",
+};
+
+const Calculator = () => {
+  const [num1, setNum1] = useState("");
+  const [num2, setNum2] = useState("");
+  const [result, setResult] = useState("");
+
+  const calculate = (op) => {
+    const a = parseFloat(num1);
+    const b = parseFloat(num2);
+    if (isNaN(a) || isNaN(b)) {
+      setResult("Invalid input");
+      return;
+    }
+    let res = "";
+    switch (op) {
+      case "+":
+        res = a + b;
+        break;
+      case "-":
+        res = a - b;
+        break;
+      case "x":
+        res = a * b;
+        break;
+      case "÷":
+        res = b !== 0 ? a / b : "Error";
+        break;
+      default:
+        res = "";
+    }
+    setResult(res);
+  };
+
+  return (
+    <div style={{ maxWidth: 800, margin: "40px auto", textAlign: "center" }}>
+      <div
+        style={{
+          background: "linear-gradient(90deg, #2196f3 80%, #42a5f5 100%)",
+          color: "#fff",
+          padding: "20px",
+          fontSize: "2rem",
+          fontWeight: "bold",
+          borderRadius: "10px 10px 0 0",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <span style={{ fontSize: "2.5rem", marginRight: 10 }}>✚</span>
+        Basic Calculator
+      </div>
+      <div style={{ display: "flex", justifyContent: "center", margin: "40px 0" }}>
+        <input
+          style={inputStyle}
+          type="number"
+          value={num1}
+          onChange={(e) => setNum1(e.target.value)}
+          placeholder="First number"
+        />
+        <input
+          style={inputStyle}
+          type="number"
+          value={num2}
+          onChange={(e) => setNum2(e.target.value)}
+          placeholder="Second number"
+        />
+      </div>
+      <div style={{ fontSize: "2rem", fontWeight: "bold", margin: "20px 0" }}>
+        Click an operation to calculate
+      </div>
+      <div>
+        <button style={buttonStyle} onClick={() => calculate("+")}>
+          +
+        </button>
+        <button style={buttonStyle} onClick={() => calculate("-")}>
+          -
+        </button>
+        <button style={buttonStyle} onClick={() => calculate("x")}>
+          ×
+        </button>
+        <button style={buttonStyle} onClick={() => calculate("÷")}>
+          ÷
+        </button>
+      </div>
+      <div style={{ fontSize: "3rem", marginTop: "40px" }}>
+        Result: {result}
+      </div>
+    </div>
+  );
+};
+
+export default Calculator;
