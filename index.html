@@ -5,94 +5,114 @@
   <title>Basic Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Navbar styles */
+    body {
+      margin: 0;
+      background: #111;
+    }
     .navbar {
       background: #4caf50;
       display: flex;
       align-items: center;
-      padding: 1rem 2rem;
-      font-family: Arial, sans-serif;
-      box-sizing: border-box;
+      padding: 0.5rem 2rem;
+      min-height: 54px;
     }
     .navbar-logo {
-      width: 36px;
-      height: 36px;
-      margin-right: 16px;
-      /* Center icon in its box */
+      width: 32px;
+      height: 32px;
+      margin-right: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
+    .navbar-logo img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      display: block;
+    }
     .navbar-title {
       color: #fff;
-      font-size: 2rem;
+      font-size: 1.6rem;
+      font-family: 'Arial Black', Arial, sans-serif;
       font-weight: bold;
       letter-spacing: 1px;
+      user-select: none;
     }
-
-    /* Calculator styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #181818;
+    /* Calculator container styles */
+    .calculator-container {
+      background: #222;
+      max-width: 340px;
+      margin: 3rem auto 0 auto;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .calculator {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 320px;
-      margin: 3rem auto;
-      box-shadow: 0 2px 8px #2222;
-    }
-    input[type="text"] {
+    .display {
       width: 100%;
       font-size: 2rem;
-      margin-bottom: 1rem;
-      padding: .5rem;
+      background: #000;
+      color: #fff;
+      border: none;
       text-align: right;
-      border-radius: 4px;
-      border: 1px solid #aaa;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-family: 'Arial Black', Arial, sans-serif;
     }
     .buttons {
+      width: 100%;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: .5rem;
+      gap: 0.75rem;
     }
-    button {
-      padding: 1rem;
+    .buttons button {
       font-size: 1.2rem;
+      padding: 0.7rem 0;
       border: none;
-      background: #eee;
-      border-radius: 4px;
+      border-radius: 8px;
+      background: #333;
+      color: #fff;
       cursor: pointer;
-      transition: background 0.1s;
+      transition: background 0.15s;
+      font-family: 'Arial Black', Arial, sans-serif;
     }
-    button:active {
-      background: #ddd;
-    }
-    .equals {
-      grid-column: span 4;
+    .buttons button:hover {
       background: #4caf50;
-      color: white;
+      color: #fff;
+    }
+    .buttons .equals {
+      background: #388e3c;
+      color: #fff;
+      grid-column: span 2;
+    }
+    .buttons .equals:hover {
+      background: #2e7031;
+    }
+    @media (max-width: 430px) {
+      .calculator-container {
+        max-width: 98vw;
+        padding: 1.2rem 0.2rem 1.2rem 0.2rem;
+      }
+      .navbar {
+        padding: 0.5rem 0.7rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar at the top -->
   <nav class="navbar">
-    <!-- Inline SVG logo, replace with your own if you want -->
     <span class="navbar-logo">
-      <svg viewBox="0 0 32 32" width="32" height="32" fill="#fff" style="filter: drop-shadow(2px 2px 0 #388e3c);">
-        <rect x="13" y="2" width="6" height="28" rx="3" />
-        <rect x="2" y="13" width="28" height="6" rx="3" />
-      </svg>
+      <img src="https://media.discordapp.net/attachments/1262130337945882705/1376042772204621944/output.png?ex=6833e332&is=683291b2&hm=64734b156cba3919b1afb807b79de5bb971a4f9e51ed028d0b714a747801b937&=&format=webp&quality=lossless&width=1376&height=860" alt="Plus Logo">
     </span>
-    <span class="navbar-title">Basic Calculator</span>
+    <span class="navbar-title">Calculator</span>
   </nav>
-  
-  <!-- Calculator -->
-  <div class="calculator">
-    <input type="text" id="display" readonly>
+
+  <div class="calculator-container">
+    <input type="text" class="display" id="display" readonly>
     <div class="buttons">
       <button onclick="press('7')">7</button>
       <button onclick="press('8')">8</button>
@@ -113,27 +133,36 @@
       <button class="equals" onclick="calculate()">=</button>
     </div>
   </div>
+
   <script>
     let display = document.getElementById('display');
-    let equation = '';
+    let currentInput = '';
 
-    function press(key) {
-      equation += key;
-      display.value = equation;
+    function press(val) {
+      // Prevent more than one decimal in a number
+      if (val === '.') {
+        let parts = currentInput.split(/[\+\-\*\/]/);
+        let last = parts[parts.length - 1];
+        if (last.includes('.')) return;
+      }
+      currentInput += val;
+      display.value = currentInput;
     }
 
     function clearDisplay() {
-      equation = '';
+      currentInput = '';
       display.value = '';
     }
 
     function calculate() {
       try {
-        display.value = eval(equation);
-        equation = display.value;
+        // Evaluate the expression safely
+        let result = eval(currentInput.replace(/÷/g, '/').replace(/×/g, '*'));
+        display.value = result;
+        currentInput = result.toString();
       } catch {
         display.value = 'Error';
-        equation = '';
+        currentInput = '';
       }
     }
   </script>
