@@ -5,16 +5,92 @@
   <title>Basic Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial, sans-serif; padding: 2rem; background: #f4f4f4; }
-    .calculator { background: #fff; padding: 2rem; border-radius: 8px; max-width: 320px; margin: auto; box-shadow: 0 2px 6px #ccc; }
-    input[type="text"] { width: 100%; font-size: 2rem; margin-bottom: 1rem; padding: .5rem; text-align: right; }
-    .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
-    button { padding: 1rem; font-size: 1.2rem; border: none; background: #eee; border-radius: 4px; cursor: pointer; }
-    button:active { background: #ddd; }
-    .equals { grid-column: span 4; background: #4caf50; color: white; }
+    /* Navbar styles */
+    .navbar {
+      background: #4caf50;
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+    }
+    .navbar-logo {
+      width: 36px;
+      height: 36px;
+      margin-right: 16px;
+      /* Center icon in its box */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .navbar-title {
+      color: #fff;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Calculator styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #181818;
+    }
+    .calculator {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 320px;
+      margin: 3rem auto;
+      box-shadow: 0 2px 8px #2222;
+    }
+    input[type="text"] {
+      width: 100%;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      padding: .5rem;
+      text-align: right;
+      border-radius: 4px;
+      border: 1px solid #aaa;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .5rem;
+    }
+    button {
+      padding: 1rem;
+      font-size: 1.2rem;
+      border: none;
+      background: #eee;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    button:active {
+      background: #ddd;
+    }
+    .equals {
+      grid-column: span 4;
+      background: #4caf50;
+      color: white;
+    }
   </style>
 </head>
 <body>
+  <!-- Navbar at the top -->
+  <nav class="navbar">
+    <!-- Inline SVG logo, replace with your own if you want -->
+    <span class="navbar-logo">
+      <svg viewBox="0 0 32 32" width="32" height="32" fill="#fff" style="filter: drop-shadow(2px 2px 0 #388e3c);">
+        <rect x="13" y="2" width="6" height="28" rx="3" />
+        <rect x="2" y="13" width="28" height="6" rx="3" />
+      </svg>
+    </span>
+    <span class="navbar-title">Basic Calculator</span>
+  </nav>
+  
+  <!-- Calculator -->
   <div class="calculator">
     <input type="text" id="display" readonly>
     <div class="buttons">
