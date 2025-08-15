@@ -617,23 +617,6 @@
 })();
 </script>
 <script>
-function goToBasic() {
-  if (typeof showCalc === "function") {
-    showCalc('basic');
-  }
-}
-document.addEventListener('DOMContentLoaded', function() {
-  // Make navbar logo and title clickable
-  var logo = document.querySelector('.navbar-logo');
-  var title = document.querySelector('.navbar-title');
-  if (logo) logo.style.cursor = "pointer";
-  if (title) title.style.cursor = "pointer";
-  if (logo) logo.onclick = goToBasic;
-  if (title) title.onclick = goToBasic;
-});
-</script>
-<script>
-// Always start in light mode unless user has set dark mode before
 document.addEventListener('DOMContentLoaded', function() {
   const darkClass = 'dark';
   const themeIcon = document.getElementById('themeIcon');
@@ -662,5 +645,21 @@ document.addEventListener('DOMContentLoaded', function() {
       setTheme(isDark);
     };
   }
+});
+</script>
+<script>
+function goToBasic() {
+  if (typeof showCalc === "function") {
+    showCalc('basic');
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  // Make navbar logo and title clickable
+  var logo = document.querySelector('.navbar-logo');
+  var title = document.querySelector('.navbar-title');
+  if (logo) logo.style.cursor = "pointer";
+  if (title) title.style.cursor = "pointer";
+  if (logo) logo.onclick = goToBasic;
+  if (title) title.onclick = goToBasic;
 });
 </script>
