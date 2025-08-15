@@ -632,3 +632,34 @@ document.addEventListener('DOMContentLoaded', function() {
   if (title) title.onclick = goToBasic;
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const darkClass = 'dark';
+  const themeIcon = document.getElementById('themeIcon');
+  const themeButton = document.getElementById('themeToggleBtn');
+  function setTheme(isDark) {
+    if (isDark) {
+      document.body.classList.add(darkClass);
+      if (themeIcon) themeIcon.textContent = '🌞';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove(darkClass);
+      if (themeIcon) themeIcon.textContent = '🌙';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  // Default to light mode unless user chose dark
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'dark') {
+    setTheme(true);
+  } else {
+    setTheme(false);
+  }
+  if (themeButton) {
+    themeButton.onclick = function() {
+      const isDark = !document.body.classList.contains(darkClass);
+      setTheme(isDark);
+    };
+  }
+});
+</script>
