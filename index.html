@@ -568,3 +568,51 @@
   </script>
 </body>
 </html>
+<script>
+(function() {
+  // Map tab type to path
+  const tabIds = ['basic', 'graphing', 'geometry', '3d', 'finance'];
+  const tabPaths = {
+    basic: '/',
+    graphing: '/graphing/',
+    geometry: '/geometry/',
+    '3d': '/3D/',
+    finance: '/finance/'
+  };
+
+  // Map path to tab type
+  function getTabTypeFromPath(path) {
+    path = path.toLowerCase();
+    if (path === '/graphing/') return 'graphing';
+    if (path === '/geometry/') return 'geometry';
+    if (path === '/3d/' || path === '/3D/') return '3d';
+    if (path === '/finance/') return 'finance';
+    return 'basic';
+  }
+
+  // Patch showCalc to update url
+  const origShowCalc = window.showCalc;
+  window.showCalc = function(type, push = true) {
+    origShowCalc(type);
+    if (push) {
+      const path = tabPaths[type];
+      if (window.location.pathname !== path) {
+        window.history.pushState({calc: type}, '', path);
+      }
+    }
+  };
+
+  // On popstate, switch tab
+  window.addEventListener('popstate', function() {
+    const type = getTabTypeFromPath(window.location.pathname);
+    window.showCalc(type, false);
+  });
+
+  // On page load, show tab for url
+  document.addEventListener('DOMContentLoaded', function() {
+    const type = getTabTypeFromPath(window.location.pathname);
+    window.showCalc(type, false);
+    window.history.replaceState({calc: type}, '', tabPaths[type]);
+  });
+})();
+</script>
