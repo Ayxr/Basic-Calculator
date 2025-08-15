@@ -533,40 +533,39 @@
       document.getElementById('finance-result').textContent = result;
     }
 
-    <script>
-(function() {
-  const darkClass = 'dark';
-  const themeButton = document.getElementById('themeToggleBtn');
-  const themeIcon = document.getElementById('themeIcon');
+    // --- THEME TOGGLE LOGIC ---
+    const themeButton = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const darkClass = 'dark';
 
-  function setTheme(isDark) {
-    if (isDark) {
-      document.body.classList.add(darkClass);
-      if (themeIcon) themeIcon.textContent = '🌞';
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.remove(darkClass);
-      if (themeIcon) themeIcon.textContent = '🌙';
-      localStorage.setItem('theme', 'light');
+    function setTheme(isDark) {
+      if (isDark) {
+        document.body.classList.add(darkClass);
+        themeIcon.textContent = '🌞';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.classList.remove(darkClass);
+        themeIcon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      }
     }
-  }
 
-  // On load, always default to light unless user chose dark
-  let storedTheme = localStorage.getItem('theme');
-  if (storedTheme === 'dark') {
-    setTheme(true);
-  } else {
-    setTheme(false);
-  }
+    // Detect and apply saved or preferred theme on load
+    (function initTheme() {
+      const storedTheme = localStorage.getItem('theme');
+      if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        setTheme(true);
+      } else {
+        setTheme(false);
+      }
+    })();
 
-  if (themeButton) {
-    themeButton.onclick = function() {
-      const currentlyDark = document.body.classList.contains(darkClass);
-      setTheme(!currentlyDark);
-    };
-  }
-})();
-</script>
+    themeButton.addEventListener('click', () => {
+      const isDark = !document.body.classList.contains(darkClass);
+      setTheme(isDark);
+    });
+
+  </script>
 </body>
 </html>
 <script>
@@ -631,36 +630,5 @@ document.addEventListener('DOMContentLoaded', function() {
   if (title) title.style.cursor = "pointer";
   if (logo) logo.onclick = goToBasic;
   if (title) title.onclick = goToBasic;
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const darkClass = 'dark';
-  const themeIcon = document.getElementById('themeIcon');
-  const themeButton = document.getElementById('themeToggleBtn');
-  function setTheme(isDark) {
-    if (isDark) {
-      document.body.classList.add(darkClass);
-      if (themeIcon) themeIcon.textContent = '🌞';
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.remove(darkClass);
-      if (themeIcon) themeIcon.textContent = '🌙';
-      localStorage.setItem('theme', 'light');
-    }
-  }
-  // Default to light mode unless user chose dark
-  const storedTheme = localStorage.getItem('theme');
-  if (storedTheme === 'dark') {
-    setTheme(true);
-  } else {
-    setTheme(false);
-  }
-  if (themeButton) {
-    themeButton.onclick = function() {
-      const isDark = !document.body.classList.contains(darkClass);
-      setTheme(isDark);
-    };
-  }
 });
 </script>
