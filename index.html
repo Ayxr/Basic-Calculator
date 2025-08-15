@@ -533,39 +533,40 @@
       document.getElementById('finance-result').textContent = result;
     }
 
-    // --- THEME TOGGLE LOGIC ---
-    const themeButton = document.getElementById('themeToggleBtn');
-    const themeIcon = document.getElementById('themeIcon');
-    const darkClass = 'dark';
+    <script>
+(function() {
+  const darkClass = 'dark';
+  const themeButton = document.getElementById('themeToggleBtn');
+  const themeIcon = document.getElementById('themeIcon');
 
-    function setTheme(isDark) {
-      if (isDark) {
-        document.body.classList.add(darkClass);
-        themeIcon.textContent = '🌞';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.classList.remove(darkClass);
-        themeIcon.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
-      }
+  function setTheme(isDark) {
+    if (isDark) {
+      document.body.classList.add(darkClass);
+      if (themeIcon) themeIcon.textContent = '🌞';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove(darkClass);
+      if (themeIcon) themeIcon.textContent = '🌙';
+      localStorage.setItem('theme', 'light');
     }
+  }
 
-    // Detect and apply saved or preferred theme on load
-    (function initTheme() {
-      const storedTheme = localStorage.getItem('theme');
-      if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        setTheme(true);
-      } else {
-        setTheme(false);
-      }
-    })();
+  // On load, always default to light unless user chose dark
+  let storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'dark') {
+    setTheme(true);
+  } else {
+    setTheme(false);
+  }
 
-    themeButton.addEventListener('click', () => {
-      const isDark = !document.body.classList.contains(darkClass);
-      setTheme(isDark);
-    });
-
-  </script>
+  if (themeButton) {
+    themeButton.onclick = function() {
+      const currentlyDark = document.body.classList.contains(darkClass);
+      setTheme(!currentlyDark);
+    };
+  }
+})();
+</script>
 </body>
 </html>
 <script>
