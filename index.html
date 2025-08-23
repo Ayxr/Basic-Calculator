@@ -632,3 +632,27 @@ document.addEventListener('DOMContentLoaded', function() {
   if (title) title.onclick = goToBasic;
 });
 </script>
+<script>
+const tabSEO = {
+  basic: { title: "Basic Calculator | BasicCalculator.org", description: "Use our free basic calculator..." },
+  graphing: { title: "Graphing Calculator | BasicCalculator.org", description: "Plot functions..." },
+  geometry: { title: "Geometry Calculator | BasicCalculator.org", description: "Calculate area, perimeter..." },
+  '3d': { title: "3D Calculator | BasicCalculator.org", description: "Explore math in 3D..." },
+  finance: { title: "Finance Calculator | BasicCalculator.org", description: "Calculate loans, investments..." }
+};
+
+// patch showCalc to update title & meta description
+const origShowCalc = window.showCalc;
+window.showCalc = function(type, push = true){
+  origShowCalc(type);
+  if(tabSEO[type]){
+    document.title = tabSEO[type].title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if(metaDesc) metaDesc.setAttribute('content', tabSEO[type].description);
+  }
+  if(push){
+    const path = tabPaths[type];
+    if(window.location.pathname !== path) window.history.pushState({calc:type}, '', path);
+  }
+};
+</script>
