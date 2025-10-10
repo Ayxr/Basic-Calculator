@@ -659,3 +659,41 @@ window.showCalc = function(type, push = true){
   }
 };
 </script>
+// --- BASIC CALCULATOR SCRIPT WITH EXPONENT BUTTON (^ for power) ---
+let display = document.getElementById('display');
+let currentInput = '';
+
+function press(val) {
+  // Prevent more than one decimal in a number
+  if (val === '.') {
+    let parts = currentInput.split(/[\+\-\*\/\^]/);
+    let last = parts[parts.length - 1];
+    if (last.includes('.')) return;
+  }
+  currentInput += val;
+  display.value = currentInput;
+}
+
+function clearDisplay() {
+  currentInput = '';
+  display.value = '';
+}
+
+function calculate() {
+  try {
+    // Replace ^ with Math.pow for exponentiation
+    // Example: 2^3 becomes Math.pow(2,3)
+    let expr = currentInput
+      .replace(/÷/g, '/')
+      .replace(/×/g, '*')
+      // Replace all instances of a^b with Math.pow(a,b)
+      .replace(/(\d+(\.\d+)?|\([^\)]+\))\^(\d+(\.\d+)?|\([^\)]+\))/g, 'Math.pow($1,$3)');
+
+    let result = eval(expr);
+    display.value = result;
+    currentInput = result.toString();
+  } catch {
+    display.value = 'Error';
+    currentInput = '';
+  }
+}
