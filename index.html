@@ -809,6 +809,14 @@ function setTheme(isDark) {
 themeButton.addEventListener('click', () => {
   const isDark = !document.body.classList.contains(darkClass);
   setTheme(isDark);
+  <div class="navbar-actions" id="navbarActions">
+  <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark/light theme" title="Toggle dark/light theme">
+    <span id="themeIcon" aria-hidden="true">🌙</span>
+  </button>
+  <button class="navbar-btn" id="loginBtn" onclick="routeTo('/login')">Sign In</button>
+  <button class="navbar-btn" id="signupBtn" onclick="routeTo('/signup')">Sign Up</button>
+  <button class="navbar-btn" id="logoutBtn" style="display:none" onclick="logout()">Sign Out</button>
+</div>
 });
   }
 };
