@@ -362,11 +362,8 @@
 
     function calculate() {
   try {
-    // Replace ÷ and × with JS operators
-    let expr = currentInput.replace(/÷/g, '/').replace(/×/g, '*');
-    // Replace ^ with Math.pow, supporting nested, chained, and parentheses
     
-    // This regex will repeatedly replace the deepest exponent first
+    let expr = currentInput.replace(/÷/g, '/').replace(/×/g, '*');
     while (expr.match(/([\-]?\d+(\.\d+)?|\([^\(\)]+\))\^([\-]?\d+(\.\d+)?|\([^\(\)]+\))/)) {
       expr = expr.replace(/([\-]?\d+(\.\d+)?|\([^\(\)]+\))\^([\-]?\d+(\.\d+)?|\([^\(\)]+\))/g, 'Math.pow($1,$3)');
     }
