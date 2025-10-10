@@ -361,16 +361,24 @@
     }
 
     function calculate() {
-      try {
-        // Evaluate the expression safely
-        let result = eval(currentInput.replace(/÷/g, '/').replace(/×/g, '*'));
-        display.value = result;
-        currentInput = result.toString();
-      } catch {
-        display.value = 'Error';
-        currentInput = '';
-      }
+  try {
+    // Replace ÷ and × with JS operators
+    let expr = currentInput.replace(/÷/g, '/').replace(/×/g, '*');
+    // Replace ^ with Math.pow, supporting nested, chained, and parentheses
+    
+    // This regex will repeatedly replace the deepest exponent first
+    while (expr.match(/([\-]?\d+(\.\d+)?|\([^\(\)]+\))\^([\-]?\d+(\.\d+)?|\([^\(\)]+\))/)) {
+      expr = expr.replace(/([\-]?\d+(\.\d+)?|\([^\(\)]+\))\^([\-]?\d+(\.\d+)?|\([^\(\)]+\))/g, 'Math.pow($1,$3)');
     }
+    
+    let result = eval(expr);
+    display.value = result;
+    currentInput = result.toString();
+  } catch {
+    display.value = 'Error';
+    currentInput = '';
+  }
+}
 
     // --- GRAPHING CALCULATOR ---
     let graphChart = null;
