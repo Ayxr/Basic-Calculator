@@ -661,56 +661,34 @@ window.showCalc = function(type, push = true){
   if(push){
     const path = tabPaths[type];
     if(window.location.pathname !== path) window.history.pushState({calc:type}, '', path);
-    // AUTH, ROUTING, AND NAVBAR LOGIC FOR LOGIN/SIGNUP PAGES
+    // --- AUTH & ROUTING FOR NAVBAR LOGIN/SIGNUP ---
 
-// --- THEME TOGGLE LOGIC ---
-const themeButton = document.getElementById('themeToggleBtn');
-const themeIcon = document.getElementById('themeIcon');
-const darkClass = 'dark';
-function setTheme(isDark) {
-  if (isDark) {
-    document.body.classList.add(darkClass);
-    themeIcon.textContent = '🌞';
-    localStorage.setItem('theme', 'dark');
-  } else {
-    document.body.classList.remove(darkClass);
-    themeIcon.textContent = '🌙';
-    localStorage.setItem('theme', 'light');
-  }
-}
-(function initTheme() {
-  const storedTheme = localStorage.getItem('theme');
-  if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    setTheme(true);
-  } else {
-    setTheme(false);
-  }
-})();
-themeButton.addEventListener('click', () => {
-  const isDark = !document.body.classList.contains(darkClass);
-  setTheme(isDark);
-});
-
-// --- AUTH LOGIC ---
+// --- AUTH STATE ---
 let currentUser = null;
+
+// --- NAVBAR HANDLING ---
 function showNavbarAuth() {
+  // Show/hide buttons depending on login state
   document.getElementById('loginBtn').style.display = currentUser ? 'none' : '';
   document.getElementById('signupBtn').style.display = currentUser ? 'none' : '';
   document.getElementById('logoutBtn').style.display = currentUser ? '' : 'none';
 }
+
+// --- LOGOUT ---
 function logout() {
   currentUser = null;
   showNavbarAuth();
   routeTo('/');
 }
 
-// --- ROUTING ---
+// --- ROUTING (SPA style) ---
 function routeTo(path) {
   window.history.pushState({}, '', path);
   renderPage();
 }
 window.addEventListener('popstate', renderPage);
 
+// --- MAIN PAGE SWITCHING LOGIC ---
 function renderPage() {
   const path = window.location.pathname;
   const calculator = document.getElementById('calculatorContainer');
@@ -804,6 +782,34 @@ function authSocial(provider) {
   currentUser = { email: provider + 'User' };
   routeTo('/');
 }
+
+// --- THEME TOGGLE LOGIC (if needed) ---
+const themeButton = document.getElementById('themeToggleBtn');
+const themeIcon = document.getElementById('themeIcon');
+const darkClass = 'dark';
+function setTheme(isDark) {
+  if (isDark) {
+    document.body.classList.add(darkClass);
+    themeIcon.textContent = '🌞';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.body.classList.remove(darkClass);
+    themeIcon.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  }
+}
+(function initTheme() {
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    setTheme(true);
+  } else {
+    setTheme(false);
+  }
+})();
+themeButton.addEventListener('click', () => {
+  const isDark = !document.body.classList.contains(darkClass);
+  setTheme(isDark);
+});
   }
 };
 </script>
