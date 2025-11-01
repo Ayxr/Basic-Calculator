@@ -662,3 +662,264 @@ window.showCalc = function(type, push = true){
   }
 };
 </script>
+/*
+  auth-navbar.js
+  - Injects Sign In / Sign Up buttons into the navbar (far right).
+  - Provides simple client-side routing for /login and /signup.
+  - Renders basic auth forms (email/phone + password) and social sign-in buttons (dummy).
+  - Shows Log Out when authenticated (front-end only).
+  - Non-destructive: if you already have elements with the correct IDs it will use them.
+*/
+
+/* CONFIG: IDs/classes used by the script
+   - navbar selector: 'nav.navbar' (will search for a <nav> with class "navbar")
+   - calculator container: '#calculatorContainer' or '.calculator-container' (script will set an id)
+   - auth container where login/signup pages render: '#authPage' (script creates it if missing)
+   - theme toggle button: element with id 'themeToggleBtn' and child with id 'themeIcon' (script will not create theme button)
+*/
+
+(function () {
+  // --- Utility helpers ---
+  function $(sel, root = document) { return root.querySelector(sel); }
+  function create(tag, attrs = {}) {
+    const el = document.createElement(tag);
+    Object.keys(attrs).forEach(k => {
+      if (k === 'class') el.className = attrs[k];
+      else if (k === 'text') el.textContent = attrs[k];
+      else el.setAttribute(k, attrs[k]);
+    });
+    return el;
+  }
+
+  // --- Find or create navbar-actions container on the right side of the navbar ---
+  const nav = $('nav.navbar') || document.querySelector('header') || document.body.querySelector('nav') || null;
+  if (!nav) {
+    console.warn('auth-navbar.js: No <nav class="navbar"> found. Script can inject buttons but recommend adding a navbar element with class "navbar".');
+  }
+
+  // Ensure calculator container has an id so script can hide it
+  let calcRoot = document.getElementById('calculatorContainer');
+  if (!calcRoot) {
+    const found = $('.calculator-container');
+    if (found) {
+      found.id = 'calculatorContainer';
+      calcRoot = found;
+    }
+  }
+
+  // Create or find the auth page container
+  let authPage = document.getElementById('authPage');
+  if (!authPage) {
+    authPage = create('div', { id: 'authPage' });
+    authPage.style.display = 'none';
+    // Insert authPage after calculatorContainer if present, otherwise append to body
+    if (calcRoot && calcRoot.parentNode) calcRoot.parentNode.insertBefore(authPage, calcRoot.nextSibling);
+    else document.body.appendChild(authPage);
+  }
+
+  // Create navbar-actions container if missing and attach to nav
+  let navbarActions = document.getElementById('navbarActions');
+  if (!navbarActions) {
+    navbarActions = create('div', { id: 'navbarActions', class: 'navbar-actions' });
+    // try to append to nav (right side). If nav exists, append; otherwise append to body header area
+    if (nav) nav.appendChild(navbarActions);
+    else document.body.appendChild(navbarActions);
+  }
+
+  // --- Create buttons if they do not exist ---
+  function ensureButton(id, text, onClick) {
+    let btn = document.getElementById(id);
+    if (!btn) {
+      btn = create('button', { id, class: 'navbar-btn' });
+      btn.textContent = text;
+      btn.addEventListener('click', onClick);
+      navbarActions.appendChild(btn);
+    } else {
+      // make sure it is hooked up
+      btn.onclick = onClick;
+      btn.style.display = '';
+    }
+    return btn;
+  }
+
+  // Theme toggle button should already exist in index; we won't recreate it but ensure presence for layout
+  let themeBtn = document.getElementById('themeToggleBtn');
+  if (!themeBtn) {
+    // create a minimal theme toggle so layout works; if you already have one, keep yours and this will not be added
+    themeBtn = create('button', { id: 'themeToggleBtn', class: 'theme-toggle-btn', title: 'Toggle theme' });
+    const icon = create('span', { id: 'themeIcon', text: '🌙' });
+    themeBtn.appendChild(icon);
+    navbarActions.appendChild(themeBtn);
+  }
+
+  // Create auth buttons (Sign In, Sign Up, Log Out)
+  const loginBtn = ensureButton('loginBtn', 'Sign In', () => routeTo('/login'));
+  const signupBtn = ensureButton('signupBtn', 'Sign Up', () => routeTo('/signup'));
+  const logoutBtn = ensureButton('logoutBtn', 'Log Out', () => logout());
+  logoutBtn.style.display = 'none'; // hidden until signed in
+
+  // --- Auth state (frontend-only demo) ---
+  let currentUser = null;
+
+  function showNavbarAuth() {
+    loginBtn.style.display = currentUser ? 'none' : '';
+    signupBtn.style.display = currentUser ? 'none' : '';
+    logoutBtn.style.display = currentUser ? '' : 'none';
+  }
+
+  function logout() {
+    currentUser = null;
+    showNavbarAuth();
+    routeTo('/');
+  }
+
+  // --- Routing system (simple SPA) ---
+  function routeTo(path) {
+    try {
+      window.history.pushState({}, '', path);
+    } catch (e) {
+      // some environments may block pushState; fallback to setting location
+      window.location.hash = '#!' + path;
+    }
+    renderPage();
+  }
+
+  window.addEventListener('popstate', renderPage);
+
+  function renderPage() {
+    const path = window.location.pathname;
+    if (path === '/login') {
+      if (calcRoot) calcRoot.style.display = 'none';
+      authPage.style.display = '';
+      renderLoginPage();
+    } else if (path === '/signup') {
+      if (calcRoot) calcRoot.style.display = 'none';
+      authPage.style.display = '';
+      renderSignupPage();
+    } else {
+      if (calcRoot) calcRoot.style.display = '';
+      authPage.style.display = 'none';
+      authPage.innerHTML = '';
+    }
+    showNavbarAuth();
+  }
+
+  // run initial render on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', function () {
+    // If path is /login or /signup when page loads, ensure calcRoot is hidden and auth rendered
+    renderPage();
+  });
+
+  // --- Auth page renderers (simple, front-end only) ---
+  function renderLoginPage() {
+    authPage.innerHTML = '';
+    const card = create('div', { class: 'auth-page' });
+    const h2 = create('h2', { text: 'Sign In' });
+    const form = create('form', { class: 'auth-form', id: 'loginForm' });
+    const email = create('input', { type: 'text', id: 'loginEmail', placeholder: 'Email or Phone', autocomplete: 'username' });
+    const pass = create('input', { type: 'password', id: 'loginPassword', placeholder: 'Password', autocomplete: 'current-password' });
+    const err = create('div', { id: 'loginError', class: 'auth-error' });
+    const submit = create('button', { type: 'submit', text: 'Sign In' });
+    form.appendChild(email);
+    form.appendChild(pass);
+    form.appendChild(err);
+    form.appendChild(submit);
+
+    // Social buttons
+    const social = create('div', { class: 'auth-social' });
+    ['Google','Facebook','Apple'].forEach(p => {
+      const b = create('button', { type: 'button', text: `Sign in with ${p}` });
+      b.addEventListener('click', () => authSocial(p));
+      social.appendChild(b);
+    });
+
+    const switchLink = create('div', { class: 'auth-switch-link', text: "Don't have an account? Sign Up" });
+    switchLink.addEventListener('click', () => routeTo('/signup'));
+
+    card.appendChild(h2);
+    card.appendChild(form);
+    card.appendChild(social);
+    card.appendChild(switchLink);
+    authPage.appendChild(card);
+
+    form.onsubmit = function (e) {
+      e.preventDefault();
+      const em = (email.value || '').trim();
+      const pw = (pass.value || '').trim();
+      if (!em || !pw) {
+        err.textContent = 'Please enter both email (or phone) and password.';
+        return;
+      }
+      // Dummy login: in a real app you'd call backend API here
+      currentUser = { email: em };
+      showNavbarAuth();
+      routeTo('/');
+    };
+  }
+
+  function renderSignupPage() {
+    authPage.innerHTML = '';
+    const card = create('div', { class: 'auth-page' });
+    const h2 = create('h2', { text: 'Sign Up' });
+    const form = create('form', { class: 'auth-form', id: 'signupForm' });
+    const email = create('input', { type: 'text', id: 'signupEmail', placeholder: 'Email or Phone', autocomplete: 'username' });
+    const pass = create('input', { type: 'password', id: 'signupPassword', placeholder: 'Password', autocomplete: 'new-password' });
+    const err = create('div', { id: 'signupError', class: 'auth-error' });
+    const submit = create('button', { type: 'submit', text: 'Sign Up' });
+    form.appendChild(email);
+    form.appendChild(pass);
+    form.appendChild(err);
+    form.appendChild(submit);
+
+    // Social buttons
+    const social = create('div', { class: 'auth-social' });
+    ['Google','Facebook','Apple'].forEach(p => {
+      const b = create('button', { type: 'button', text: `Sign up with ${p}` });
+      b.addEventListener('click', () => authSocial(p));
+      social.appendChild(b);
+    });
+
+    const switchLink = create('div', { class: 'auth-switch-link', text: "Already have an account? Sign In" });
+    switchLink.addEventListener('click', () => routeTo('/login'));
+
+    card.appendChild(h2);
+    card.appendChild(form);
+    card.appendChild(social);
+    card.appendChild(switchLink);
+    authPage.appendChild(card);
+
+    form.onsubmit = function (e) {
+      e.preventDefault();
+      const em = (email.value || '').trim();
+      const pw = (pass.value || '').trim();
+      if (!em || !pw) {
+        err.textContent = 'Please enter both email (or phone) and password.';
+        return;
+      }
+      // Dummy signup: in a real app you'd call backend API here
+      currentUser = { email: em };
+      showNavbarAuth();
+      routeTo('/');
+    };
+  }
+
+  // --- Dummy social auth handler ---
+  function authSocial(provider) {
+    // In a real integration this would redirect to the provider's OAuth flow.
+    currentUser = { email: provider + 'User' };
+    showNavbarAuth();
+    routeTo('/');
+  }
+
+  // expose some helpers globally for existing inline onclicks (routeTo/logout)
+  window.routeTo = routeTo;
+  window.logout = logout;
+  window.authSocial = authSocial;
+
+  // Ensure initial navbar auth state
+  showNavbarAuth();
+
+  // Informational console message
+  console.info('auth-navbar.js initialized — Sign In / Sign Up buttons injected (if navbar found). Front-end only auth demo.');
+
+})();
