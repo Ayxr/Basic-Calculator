@@ -713,6 +713,15 @@
 
         form.appendChild(email); form.appendChild(pass); form.appendChild(err); form.appendChild(submit);
 
+        const socialWrap = create('div', { class: 'auth-social' });
+        ['Google'].forEach(provider => {
+          const b = create('button', { type: 'button', text: `Sign in with ${provider}` });
+          b.style.width = '100%'; b.style.padding = '0.55rem'; b.style.borderRadius = '8px'; b.style.border = '1px solid #ddd';
+          b.style.marginTop = '0.45rem'; b.style.cursor = 'pointer'; b.style.fontFamily = "'Arial Black', ariblk, Arial, sans-serif";
+          b.addEventListener('click', () => authSocial(provider));
+          socialWrap.appendChild(b);
+        });
+
         const switchLink = create('div', { class: 'auth-switch-link', text: "Don't have an account? Sign Up" });
         switchLink.style.textAlign = 'center'; switchLink.style.marginTop = '0.8rem'; switchLink.style.color = '#4caf50'; switchLink.style.cursor = 'pointer';
         switchLink.addEventListener('click', () => routeTo('/signup/'));
