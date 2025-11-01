@@ -644,7 +644,7 @@
 
       const signinBtn = ensureNavBtn('signinBtn', 'Sign In', () => routeTo('/signin/'));
       const signupBtn = ensureNavBtn('signupBtn', 'Sign Up', () => routeTo('/signup/'));
-      const logoutBtn = ensureNavBtn('logoutBtn', 'Sign Out', signout);
+      const logoutBtn = ensureNavBtn('logoutBtn', 'Log Out', logout);
       logoutBtn.style.display = 'none';
 
       let currentUser = loadUser();
