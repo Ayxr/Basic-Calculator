@@ -4,42 +4,19 @@
   <meta charset="UTF-8">
   <title>Basic Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17166237694"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-17166237694');
-  </script>
-
-  <!-- Favicon for browser tab, bookmarks, and some search result icons -->
   <link rel="icon" type="image/jpeg" href="https://i.imgur.com/yGYoTI8.jpeg" sizes="48x48">
-
-  <!-- SEO: Meta Description for Search Engines -->
   <meta name="description" content="Basic Calculator – a free, easy-to-use tool for quick and simple calculations. Perfect for algebra, homework, and fast math!.">
-
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://basiccalculator.org/">
-
-  <!-- Open Graph / Social Media Embed -->
   <meta property="og:title" content="Basic Calculator">
   <meta property="og:description" content="Basic Calculator – a free, easy-to-use tool for quick and simple calculations. Perfect for algebra, homework, and fast math!">
   <meta property="og:image" content="https://i.imgur.com/obKkPP2.jpeg">
   <meta property="og:url" content="https://basiccalculator.org/">
   <meta property="og:type" content="website">
-
-  <!-- Twitter Card (for Twitter/X sharing) -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Basic Calculator">
   <meta name="twitter:description" content="Basic Calculator, a free and easy calculator for quick and easy calculations. One of the best calculators for simple math, algebra, homework.">
   <meta name="twitter:image" content="https://i.imgur.com/obKkPP2.jpeg">
-
-  <!-- Robots: Allow indexing and following links -->
   <meta name="robots" content="index, follow">
-
-  <!-- Site Name structured data for Google search results -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,209 +26,43 @@
     "alternateName": "basiccalculator.org"
   }
   </script>
-
   <style>
-    body {
-      margin: 0;
-      background: #f7f7f7;
-      color: #222;
-      transition: background 0.4s, color 0.4s;
-    }
-    body.dark {
-      background: #181a1b;
-      color: #e0e0e0;
-    }
-    .navbar {
-      background: #4caf50;
-      display: flex;
-      align-items: center;
-      padding: 0.5rem 2rem;
-      min-height: 54px;
-      justify-content: space-between;
-    }
-    .navbar-logo {
-      width: 32px;
-      height: 32px;
-      margin-right: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .navbar-logo img {
-      width: 32px;
-      height: 32px;
-      object-fit: contain;
-      display: block;
-    }
-    .navbar-title {
-      color: #fff;
-      font-size: 1.6rem;
-      font-family: 'Arial Black', Arial, sans-serif;
-      font-weight: bold;
-      letter-spacing: 1px;
-      user-select: none;
-      margin-right: auto;
-    }
-    .theme-toggle-btn {
-      background: none;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      font-size: 1.6rem;
-      padding: 6px 10px;
-      border-radius: 50%;
-      color: #fff;
-      transition: background 0.18s, color 0.18s;
-      margin-left: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .theme-toggle-btn:hover {
-      background: rgba(255,255,255,0.18);
-    }
-    /* Calculator container styles */
-    .calculator-container {
-      background: #fff;
-      max-width: 340px;
-      margin: 3rem auto 0 auto;
-      padding: 2rem 1.5rem 1.5rem 1.5rem;
-      border-radius: 16px;
-      box-shadow: 0 6px 32px rgba(0,0,0,0.13);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: background 0.4s, color 0.4s;
-    }
-    body.dark .calculator-container {
-      background: #232627;
-      color: #e0e0e0;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.40);
-    }
-    .display {
-      width: 100%;
-      font-size: 2rem;
-      background: #f2f2f2;
-      color: #222;
-      border: none;
-      text-align: right;
-      margin-bottom: 1.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      box-sizing: border-box;
-      font-family: 'Arial Black', Arial, sans-serif;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.07);
-      transition: background 0.4s, color 0.4s;
-    }
-    body.dark .display {
-      background: #24272a;
-      color: #e0e0e0;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.22);
-    }
-    .buttons {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
-    }
-    .buttons button {
-      font-size: 1.2rem;
-      padding: 0.7rem 0;
-      border: none;
-      border-radius: 8px;
-      background: #f3f3f3;
-      color: #222;
-      cursor: pointer;
-      transition: background 0.18s, color 0.18s;
-      font-family: 'Arial Black', Arial, sans-serif;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-    }
-    .buttons button:hover {
-      background: #4caf50;
-      color: #fff;
-    }
-    .buttons .equals {
-      background: #4caf50;
-      color: #fff;
-      grid-column: span 2;
-    }
-    .buttons .equals:hover {
-      background: #388e3c;
-    }
-    body.dark .buttons button {
-      background: #232627;
-      color: #e0e0e0;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.19);
-    }
-    body.dark .buttons button:hover,
-    body.dark .buttons .equals:hover {
-      background: #388e3c;
-      color: #fff;
-    }
-    body.dark .buttons .equals {
-      background: #388e3c;
-    }
-    /* --- NEW STYLES FOR CALCULATOR NAVIGATION & TABS --- */
-    .calc-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 1.2rem;
-      flex-wrap: wrap;
-    }
-    .calc-tab {
-      border: none;
-      background: #e0e0e0;
-      color: #222;
-      padding: 0.35rem 1.1rem;
-      border-radius: 16px;
-      font-size: 1rem;
-      font-family: 'Arial Black', Arial, sans-serif;
-      cursor: pointer;
-      transition: background 0.18s, color 0.18s;
-      margin: 2px 0;
-    }
-    .calc-tab.active, .calc-tab:hover {
-      background: #4caf50;
-      color: #fff;
-    }
-    body.dark .calc-tab {
-      background: #232627;
-      color: #e0e0e0;
-    }
-    body.dark .calc-tab.active, body.dark .calc-tab:hover {
-      background: #388e3c;
-      color: #fff;
-    }
-    /* --- END CALC NAV --- */
-    @media (max-width: 430px) {
-      .calculator-container {
-        max-width: 98vw;
-        padding: 1.2rem 0.2rem 1.2rem 0.2rem;
-      }
-      .navbar {
-        padding: 0.5rem 0.7rem;
-      }
-      .calc-tab {
-        font-size: 0.94rem;
-        padding: 0.22rem 0.7rem;
-      }
-    }
+    body { margin:0; background:#f7f7f7; color:#222; transition:background .4s,color .4s; }
+    body.dark { background:#181a1b; color:#e0e0e0; }
+    .navbar { background:#4caf50; display:flex; align-items:center; padding:.5rem 2rem; min-height:54px; justify-content:space-between; }
+    .navbar-logo { width:32px; height:32px; margin-right:14px; display:flex; align-items:center; justify-content:center; }
+    .navbar-logo img { width:32px; height:32px; object-fit:contain; display:block; }
+    .navbar-title { color:#fff; font-size:1.6rem; font-family:'Arial Black', Arial, sans-serif; font-weight:bold; letter-spacing:1px; user-select:none; margin-right:auto; }
+    .theme-toggle-btn { background:none; border:none; outline:none; cursor:pointer; font-size:1.6rem; padding:6px 10px; border-radius:50%; color:#fff; margin-left:10px; display:flex; align-items:center; justify-content:center; }
+    .calculator-container { background:#fff; max-width:340px; margin:3rem auto 0; padding:2rem 1.5rem 1.5rem; border-radius:16px; box-shadow:0 6px 32px rgba(0,0,0,.13); display:flex; flex-direction:column; align-items:center; }
+    body.dark .calculator-container { background:#232627; color:#e0e0e0; box-shadow:0 8px 40px rgba(0,0,0,.40); }
+    .display { width:100%; font-size:2rem; background:#f2f2f2; color:#222; border:none; text-align:right; margin-bottom:1.5rem; padding:.5rem 1rem; border-radius:8px; box-sizing:border-box; font-family:'Arial Black', Arial, sans-serif; }
+    .buttons { width:100%; display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; }
+    .buttons button { font-size:1.2rem; padding:.7rem 0; border:none; border-radius:8px; background:#f3f3f3; color:#222; cursor:pointer; font-family:'Arial Black', Arial, sans-serif; }
+    .buttons .equals { background:#4caf50; color:#fff; grid-column:span 2; }
+    .calc-tabs { display:flex; justify-content:center; gap:.5rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+    .calc-tab { border:none; background:#e0e0e0; color:#222; padding:.35rem 1.1rem; border-radius:16px; font-size:1rem; font-family:'Arial Black', Arial, sans-serif; cursor:pointer; }
+    .calc-tab.active, .calc-tab:hover { background:#4caf50; color:#fff; }
+    @media (max-width:430px) { .calculator-container { max-width:98vw; padding:1.2rem .2rem; } .navbar { padding:.5rem .7rem; } }
+    /* simple navbar-actions styling so injected buttons align */
+    #navbarActions { display:flex; align-items:center; gap:.5rem; margin-left:auto; }
+    #navbarActions .navbar-btn { background:none; border:1px solid rgba(255,255,255,.18); color:#fff; padding:.35rem .6rem; border-radius:8px; cursor:pointer; font-family:'Arial Black', Arial, sans-serif; }
+    body.dark #navbarActions .navbar-btn { color:#e0e0e0; border-color:rgba(0,0,0,.12); }
+    /* auth page card */
+    .auth-page { max-width:380px; margin:3rem auto; padding:1.6rem; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,.08); background:#fff; }
+    body.dark .auth-page { background:#232627; color:#e0e0e0; }
   </style>
 </head>
 <body>
   <nav class="navbar">
-    <span class="navbar-logo">
-      <img src="https://i.imgur.com/3Z1DXo6.png" alt="Plus Logo">
-    </span>
+    <span class="navbar-logo"><img src="https://i.imgur.com/3Z1DXo6.png" alt="Plus Logo"></span>
     <span class="navbar-title">Basic Calculator</span>
-    <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark/light theme" title="Toggle dark/light theme">
-      <span id="themeIcon" aria-hidden="true">🌙</span>
-    </button>
+    <div id="navbarActions">
+      <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle theme"><span id="themeIcon">🌙</span></button>
+    </div>
   </nav>
 
   <div class="calculator-container">
-    <!-- Calculator Type Tabs -->
     <div class="calc-tabs">
       <button class="calc-tab active" id="tab-basic" onclick="showCalc('basic')">Basic</button>
       <button class="calc-tab" id="tab-graphing" onclick="showCalc('graphing')">Graphing</button>
@@ -259,7 +70,7 @@
       <button class="calc-tab" id="tab-3d" onclick="showCalc('3d')">3D</button>
       <button class="calc-tab" id="tab-finance" onclick="showCalc('finance')">Finance</button>
     </div>
-    <!-- Basic Calculator -->
+
     <div id="calc-basic">
       <input type="text" class="display" id="display" readonly>
       <div class="buttons">
@@ -283,386 +94,165 @@
         <button class="equals" onclick="calculate()">=</button>
       </div>
     </div>
-    <!-- Graphing Calculator -->
+
     <div id="calc-graphing" style="display:none;">
       <div style="width:100%">
-        <input type="text" id="graph-function" placeholder="Enter function, e.g. y = x^2 + 2x" style="width: 100%; font-size: 1.1rem; margin-bottom: 0.8rem; border-radius: 8px; border: 1px solid #ccc; padding: 0.4rem 0.7rem;">
-        <button onclick="plotGraph()" style="width:100%; margin-bottom: 0.8rem; border-radius:8px; font-size:1rem; background:#4caf50; color:#fff; border:none; padding: 0.4rem 0;">Plot</button>
-        <canvas id="graph-canvas" width="310" height="220" style="background:#fff; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);"></canvas>
+        <input type="text" id="graph-function" placeholder="Enter function, e.g. y = x^2 + 2x" style="width:100%; font-size:1.1rem; margin-bottom:.8rem; border-radius:8px; border:1px solid #ccc; padding:.4rem .7rem;">
+        <button onclick="plotGraph()" style="width:100%; margin-bottom:.8rem; border-radius:8px; font-size:1rem; background:#4caf50; color:#fff; border:none; padding:.4rem 0;">Plot</button>
+        <canvas id="graph-canvas" width="310" height="220" style="background:#fff; border-radius:12px;"></canvas>
       </div>
     </div>
-    <!-- Geometry Calculator -->
+
     <div id="calc-geometry" style="display:none;">
-      <select id="geometry-shape" style="width:100%; font-size:1rem; margin-bottom:0.8rem; border-radius:8px; border:1px solid #ccc; padding:0.4rem 0.7rem;">
+      <select id="geometry-shape" style="width:100%; margin-bottom:.8rem; border-radius:8px; border:1px solid #ccc; padding:.4rem .7rem;">
         <option value="circle">Circle</option>
         <option value="triangle">Triangle</option>
         <option value="rectangle">Rectangle</option>
       </select>
       <div id="geometry-inputs"></div>
-      <button onclick="calcGeometry()" style="width:100%; margin-bottom: 0.8rem; border-radius:8px; font-size:1rem; background:#4caf50; color:#fff; border:none; padding: 0.4rem 0;">Calculate</button>
-      <div id="geometry-result" style="margin-top:0.6rem; font-size:1.05rem;"></div>
+      <button onclick="calcGeometry()" style="width:100%; margin-bottom:.8rem; border-radius:8px; background:#4caf50; color:#fff; border:none; padding:.4rem 0;">Calculate</button>
+      <div id="geometry-result" style="margin-top:.6rem; font-size:1.05rem;"></div>
     </div>
-    <!-- 3D Calculator -->
+
     <div id="calc-3d" style="display:none;">
-      <select id="threed-shape" style="width:100%; font-size:1rem; margin-bottom:0.8rem; border-radius:8px; border:1px solid #ccc; padding:0.4rem 0.7rem;">
+      <select id="threed-shape" style="width:100%; margin-bottom:.8rem; border-radius:8px; border:1px solid #ccc; padding:.4rem .7rem;">
         <option value="sphere">Sphere</option>
         <option value="cube">Cube</option>
         <option value="cylinder">Cylinder</option>
       </select>
       <div id="threed-inputs"></div>
-      <button onclick="calc3D()" style="width:100%; margin-bottom: 0.8rem; border-radius:8px; font-size:1rem; background:#4caf50; color:#fff; border:none; padding: 0.4rem 0;">Calculate</button>
-      <div id="threed-result" style="margin-top:0.6rem; font-size:1.05rem;"></div>
+      <button onclick="calc3D()" style="width:100%; margin-bottom:.8rem; border-radius:8px; background:#4caf50; color:#fff; border:none; padding:.4rem 0;">Calculate</button>
+      <div id="threed-result" style="margin-top:.6rem; font-size:1.05rem;"></div>
     </div>
-    <!-- Finance Calculator -->
+
     <div id="calc-finance" style="display:none;">
-      <select id="finance-type" style="width:100%; font-size:1rem; margin-bottom:0.8rem; border-radius:8px; border:1px solid #ccc; padding:0.4rem 0.7rem;">
+      <select id="finance-type" style="width:100%; margin-bottom:.8rem; border-radius:8px; border:1px solid #ccc; padding:.4rem .7rem;">
         <option value="loan">Loan Payment</option>
         <option value="compound">Compound Interest</option>
       </select>
       <div id="finance-inputs"></div>
-      <button onclick="calcFinance()" style="width:100%; margin-bottom: 0.8rem; border-radius:8px; font-size:1rem; background:#4caf50; color:#fff; border:none; padding: 0.4rem 0;">Calculate</button>
-      <div id="finance-result" style="margin-top:0.6rem; font-size:1.05rem;"></div>
+      <button onclick="calcFinance()" style="width:100%; margin-bottom:.8rem; border-radius:8px; background:#4caf50; color:#fff; border:none; padding:.4rem 0;">Calculate</button>
+      <div id="finance-result" style="margin-top:.6rem; font-size:1.05rem;"></div>
     </div>
   </div>
 
-  <!-- Chart.js for graphing -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
-    // --- CALCULATOR TABS ---
-    const tabIds = ['basic', 'graphing', 'geometry', '3d', 'finance'];
-    function showCalc(type) {
-      tabIds.forEach(id => {
-        document.getElementById('calc-' + id).style.display = (id === type) ? '' : 'none';
-        document.getElementById('tab-' + id).classList.toggle('active', id === type);
-      });
-    }
-
-    // --- BASIC CALCULATOR ---
-    let display = document.getElementById('display');
-    let currentInput = '';
-
-    function press(val) {
-      // Prevent more than one decimal in a number
-      if (val === '.') {
-        let parts = currentInput.split(/[\+\-\*\/]/);
-        let last = parts[parts.length - 1];
-        if (last.includes('.')) return;
-      }
-      currentInput += val;
-      display.value = currentInput;
-    }
-
-    function clearDisplay() {
-      currentInput = '';
-      display.value = '';
-    }
-
-    function calculate() {
-      try {
-        let expr = currentInput.replace(/÷/g, '/').replace(/×/g, '*');
-        while (expr.match(/([\-]?\d+(\.\d+)?|\([^\(\)]+\))\^([\-]?\d+(\.\d+)?|\([^\(\)]+\))/)) {
-          expr = expr.replace(/([\-]?\d+(\.\d+)?|\([^\(\)]+\))\^([\-]?\d+(\.\d+)?|\([^\(\)]+\))/g, 'Math.pow($1,$3)');
-        }
-        let result = eval(expr);
-        display.value = result;
-        currentInput = result.toString();
-      } catch {
-        display.value = 'Error';
-        currentInput = '';
-      }
-    }
-
-    // --- GRAPHING CALCULATOR ---
-    let graphChart = null;
-    function plotGraph() {
-      const fnInput = document.getElementById('graph-function').value;
-      const ctx = document.getElementById('graph-canvas').getContext('2d');
-      let expression = fnInput.trim().toLowerCase().replace('y=', '').replace('^', '**');
-      let xs = [], ys = [];
-      for (let x = -10; x <= 10; x += 0.1) {
-        let safeExpr = expression.replace(/x/g, `(${x})`);
-        let y = NaN;
-        try { y = eval(safeExpr); } catch {}
-        xs.push(Number(x.toFixed(2)));
-        ys.push(isNaN(y) ? null : y);
-      }
-      if (graphChart) graphChart.destroy();
-      graphChart = new Chart(ctx, {
-        type: 'line',
-        data: { labels: xs, datasets: [{label: fnInput, data: ys, borderColor:'#4caf50', borderWidth:2, pointRadius:0, fill:false }] },
-        options: {
-          responsive: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            x: { title: {display:true, text:'x'}, min: -10, max: 10, grid:{color:'#eee'} },
-            y: { title: {display:true, text:'y'}, grid:{color:'#eee'} }
-          }
-        }
-      });
-    }
-
-    // --- GEOMETRY CALCULATOR ---
-    const geometryInputs = {
-      circle: [{id:'radius', label:'Radius', type:'number'}],
-      triangle: [
-        {id:'base', label:'Base', type:'number'},
-        {id:'height', label:'Height', type:'number'}
-      ],
-      rectangle: [
-        {id:'width', label:'Width', type:'number'},
-        {id:'height', label:'Height', type:'number'}
-      ]
-    };
-    function renderGeometryInputs() {
-      const shape = document.getElementById('geometry-shape').value;
-      const container = document.getElementById('geometry-inputs');
-      container.innerHTML = '';
-      geometryInputs[shape].forEach(inp => {
-        container.innerHTML += `<input id="geo-${inp.id}" type="${inp.type}" step="any" placeholder="${inp.label}" style="width:100%; margin-bottom:0.4rem; border-radius:6px; border:1px solid #ccc; padding:0.35rem 0.6rem;">`;
-      });
-    }
-    document.getElementById('geometry-shape').addEventListener('change', renderGeometryInputs);
-    renderGeometryInputs();
-
-    function calcGeometry() {
-      const shape = document.getElementById('geometry-shape').value;
-      let result = '';
-      if (shape === 'circle') {
-        const r = parseFloat(document.getElementById('geo-radius').value);
-        if (isNaN(r) || r <= 0) result = 'Please enter a positive radius.';
-        else result = `Area: ${(Math.PI * r * r).toFixed(4)}, Circumference: ${(2 * Math.PI * r).toFixed(4)}`;
-      } else if (shape === 'triangle') {
-        const b = parseFloat(document.getElementById('geo-base').value);
-        const h = parseFloat(document.getElementById('geo-height').value);
-        if (isNaN(b) || b <= 0 || isNaN(h) || h <= 0) result = 'Enter positive base & height.';
-        else result = `Area: ${(0.5 * b * h).toFixed(4)}`;
-      } else if (shape === 'rectangle') {
-        const w = parseFloat(document.getElementById('geo-width').value);
-        const h = parseFloat(document.getElementById('geo-height').value);
-        if (isNaN(w) || w <= 0 || isNaN(h) || h <= 0) result = 'Enter positive width & height.';
-        else result = `Area: ${(w * h).toFixed(4)}, Perimeter: ${(2*(w+h)).toFixed(4)}`;
-      }
-      document.getElementById('geometry-result').textContent = result;
-    }
-
-    // --- 3D CALCULATOR ---
-    const threedInputs = {
-      sphere: [{id:'radius', label:'Radius', type:'number'}],
-      cube: [{id:'side', label:'Side Length', type:'number'}],
-      cylinder: [
-        {id:'radius', label:'Radius', type:'number'},
-        {id:'height', label:'Height', type:'number'}
-      ],
-    };
-    function render3DInputs() {
-      const shape = document.getElementById('threed-shape').value;
-      const container = document.getElementById('threed-inputs');
-      container.innerHTML = '';
-      threedInputs[shape].forEach(inp => {
-        container.innerHTML += `<input id="threed-${inp.id}" type="${inp.type}" step="any" placeholder="${inp.label}" style="width:100%; margin-bottom:0.4rem; border-radius:6px; border:1px solid #ccc; padding:0.35rem 0.6rem;">`;
-      });
-    }
-    document.getElementById('threed-shape').addEventListener('change', render3DInputs);
-    render3DInputs();
-
-    function calc3D() {
-      const shape = document.getElementById('threed-shape').value;
-      let result = '';
-      if (shape === 'sphere') {
-        const r = parseFloat(document.getElementById('threed-radius').value);
-        if (isNaN(r) || r <= 0) result = 'Enter a positive radius.';
-        else result = `Volume: ${(4/3*Math.PI*r**3).toFixed(4)}, Surface Area: ${(4*Math.PI*r**2).toFixed(4)}`;
-      } else if (shape === 'cube') {
-        const s = parseFloat(document.getElementById('threed-side').value);
-        if (isNaN(s) || s <= 0) result = 'Enter positive side length.';
-        else result = `Volume: ${(s**3).toFixed(4)}, Surface Area: ${(6*s**2).toFixed(4)}`;
-      } else if (shape === 'cylinder') {
-        const r = parseFloat(document.getElementById('threed-radius').value);
-        const h = parseFloat(document.getElementById('threed-height').value);
-        if (isNaN(r) || r <= 0 || isNaN(h) || h <= 0) result = 'Enter positive radius & height.';
-        else result = `Volume: ${(Math.PI*r**2*h).toFixed(4)}, Surface Area: ${(2*Math.PI*r*(r+h)).toFixed(4)}`;
-      }
-      document.getElementById('threed-result').textContent = result;
-    }
-
-    // --- FINANCE CALCULATOR ---
-    const financeInputs = {
-      loan: [
-        {id:'amount', label:'Loan Amount', type:'number'},
-        {id:'rate', label:'Annual Interest Rate (%)', type:'number'},
-        {id:'years', label:'Years', type:'number'}
-      ],
-      compound: [
-        {id:'principal', label:'Principal Amount', type:'number'},
-        {id:'rate', label:'Annual Interest Rate (%)', type:'number'},
-        {id:'years', label:'Years', type:'number'},
-        {id:'frequency', label:'Compoundings/Year', type:'number'}
-      ]
-    };
-    function renderFinanceInputs() {
-      const ftype = document.getElementById('finance-type').value;
-      const container = document.getElementById('finance-inputs');
-      container.innerHTML = '';
-      financeInputs[ftype].forEach(inp => {
-        container.innerHTML += `<input id="finance-${inp.id}" type="${inp.type}" step="any" placeholder="${inp.label}" style="width:100%; margin-bottom:0.4rem; border-radius:6px; border:1px solid #ccc; padding:0.35rem 0.6rem;">`;
-      });
-    }
-    document.getElementById('finance-type').addEventListener('change', renderFinanceInputs);
-    renderFinanceInputs();
-
-    function calcFinance() {
-      const ftype = document.getElementById('finance-type').value;
-      let result = '';
-      if (ftype === 'loan') {
-        const P = parseFloat(document.getElementById('finance-amount').value);
-        const r = parseFloat(document.getElementById('finance-rate').value) / 100 / 12;
-        const n = parseFloat(document.getElementById('finance-years').value) * 12;
-        if (isNaN(P) || isNaN(r) || isNaN(n) || P <= 0 || r <= 0 || n <= 0) result = 'Enter all values as positive numbers.';
-        else {
-          const payment = (P * r) / (1 - Math.pow(1 + r, -n));
-          result = `Monthly Payment: $${payment.toFixed(2)}`;
-        }
-      } else if (ftype === 'compound') {
-        const P = parseFloat(document.getElementById('finance-principal').value);
-        const r = parseFloat(document.getElementById('finance-rate').value) / 100;
-        const t = parseFloat(document.getElementById('finance-years').value);
-        const n = parseFloat(document.getElementById('finance-frequency').value);
-        if (isNaN(P) || isNaN(r) || isNaN(t) || isNaN(n) || P <= 0 || r <= 0 || t <= 0 || n <= 0) result = 'Enter all values as positive numbers.';
-        else {
-          const A = P * Math.pow(1 + r / n, n * t);
-          result = `Future Value: $${A.toFixed(2)}`;
-        }
-      }
-      document.getElementById('finance-result').textContent = result;
-    }
-
-    // --- THEME TOGGLE LOGIC ---
-    const themeButton = document.getElementById('themeToggleBtn');
-    const themeIcon = document.getElementById('themeIcon');
-    const darkClass = 'dark';
-
-    function setTheme(isDark) {
-      if (isDark) {
-        document.body.classList.add(darkClass);
-        themeIcon.textContent = '🌞';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.classList.remove(darkClass);
-        themeIcon.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
-      }
-    }
-
-    // Detect and apply saved or preferred theme on load
-    (function initTheme() {
-      const storedTheme = localStorage.getItem('theme');
-      if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        setTheme(true);
-      } else {
-        setTheme(false);
-      }
-    })();
-
-    themeButton.addEventListener('click', () => {
-      const isDark = !document.body.classList.contains(darkClass);
-      setTheme(isDark);
-    });
-
+    const tabIds = ['basic','graphing','geometry','3d','finance'];
+    function showCalc(type) { tabIds.forEach(id => { document.getElementById('calc-'+id).style.display = (id===type)?'':'none'; document.getElementById('tab-'+id).classList.toggle('active', id===type); }); }
+    let display = document.getElementById('display'); let currentInput = '';
+    function press(v){ if(v==='.'){ let parts=currentInput.split(/[\+\-\*\/]/); if(parts[parts.length-1].includes('.')) return; } currentInput+=v; display.value=currentInput; }
+    function clearDisplay(){ currentInput=''; display.value=''; }
+    function calculate(){ try{ let expr=currentInput.replace(/÷/g,'/').replace(/×/g,'*'); while(expr.match(/([\-]?\d+(\.\d+)?|\([^\(\)]+\))\^([\-]?\d+(\.\d+)?|\([^\(\)]+\))/)){ expr=expr.replace(/([\-]?\d+(\.\d+)?|\([^\(\)]+\))\^([\-]?\d+(\.\d+)?|\([^\(\)]+\))/g,'Math.pow($1,$3)'); } let result=eval(expr); display.value=result; currentInput=result.toString(); }catch{ display.value='Error'; currentInput=''; } }
+    // graph, geometry, 3d, finance functions (kept as in your file)
+    let graphChart=null;
+    function plotGraph(){ const fnInput=document.getElementById('graph-function').value; const ctx=document.getElementById('graph-canvas').getContext('2d'); let expression=fnInput.trim().toLowerCase().replace('y=','').replace('^','**'); let xs=[],ys=[]; for(let x=-10;x<=10;x+=0.1){ let safeExpr=expression.replace(/x/g,`(${x})`); let y=NaN; try{ y=eval(safeExpr); }catch{} xs.push(Number(x.toFixed(2))); ys.push(isNaN(y)?null:y); } if(graphChart) graphChart.destroy(); graphChart=new Chart(ctx,{type:'line',data:{labels:xs,datasets:[{label:fnInput,data:ys,borderColor:'#4caf50',borderWidth:2,pointRadius:0,fill:false}]},options:{responsive:false,plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'x'},min:-10,max:10,grid:{color:'#eee'}},y:{title:{display:true,text:'y'},grid:{color:'#eee'}}}}}); }
+    const geometryInputs={ circle:[{id:'radius',label:'Radius',type:'number'}], triangle:[{id:'base',label:'Base',type:'number'},{id:'height',label:'Height',type:'number'}], rectangle:[{id:'width',label:'Width',type:'number'},{id:'height',label:'Height',type:'number'}] };
+    function renderGeometryInputs(){ const shape=document.getElementById('geometry-shape').value; const container=document.getElementById('geometry-inputs'); container.innerHTML=''; geometryInputs[shape].forEach(inp=>{ container.innerHTML+=`<input id="geo-${inp.id}" type="${inp.type}" step="any" placeholder="${inp.label}" style="width:100%; margin-bottom:.4rem; border-radius:6px; border:1px solid #ccc; padding:.35rem .6rem;">`; }); }
+    document.getElementById('geometry-shape').addEventListener('change', renderGeometryInputs); renderGeometryInputs();
+    function calcGeometry(){ const shape=document.getElementById('geometry-shape').value; let result=''; if(shape==='circle'){ const r=parseFloat(document.getElementById('geo-radius').value); if(isNaN(r)||r<=0) result='Please enter a positive radius.'; else result=`Area: ${(Math.PI*r*r).toFixed(4)}, Circumference: ${(2*Math.PI*r).toFixed(4)}`; } else if(shape==='triangle'){ const b=parseFloat(document.getElementById('geo-base').value); const h=parseFloat(document.getElementById('geo-height').value); if(isNaN(b)||b<=0||isNaN(h)||h<=0) result='Enter positive base & height.'; else result=`Area: ${(0.5*b*h).toFixed(4)}`; } else if(shape==='rectangle'){ const w=parseFloat(document.getElementById('geo-width').value); const h=parseFloat(document.getElementById('geo-height').value); if(isNaN(w)||w<=0||isNaN(h)||h<=0) result='Enter positive width & height.'; else result=`Area: ${(w*h).toFixed(4)}, Perimeter: ${(2*(w+h)).toFixed(4)}`; } document.getElementById('geometry-result').textContent=result; }
+    const threedInputs={ sphere:[{id:'radius',label:'Radius',type:'number'}], cube:[{id:'side',label:'Side Length',type:'number'}], cylinder:[{id:'radius',label:'Radius',type:'number'},{id:'height',label:'Height',type:'number'}] };
+    function render3DInputs(){ const shape=document.getElementById('threed-shape').value; const container=document.getElementById('threed-inputs'); container.innerHTML=''; threedInputs[shape].forEach(inp=>{ container.innerHTML+=`<input id="threed-${inp.id}" type="${inp.type}" step="any" placeholder="${inp.label}" style="width:100%; margin-bottom:.4rem; border-radius:6px; border:1px solid #ccc; padding:.35rem .6rem;">`; }); }
+    document.getElementById('threed-shape').addEventListener('change', render3DInputs); render3DInputs();
+    function calc3D(){ const shape=document.getElementById('threed-shape').value; let result=''; if(shape==='sphere'){ const r=parseFloat(document.getElementById('threed-radius').value); if(isNaN(r)||r<=0) result='Enter a positive radius.'; else result=`Volume: ${(4/3*Math.PI*r**3).toFixed(4)}, Surface Area: ${(4*Math.PI*r**2).toFixed(4)}`; } else if(shape==='cube'){ const s=parseFloat(document.getElementById('threed-side').value); if(isNaN(s)||s<=0) result='Enter positive side length.'; else result=`Volume: ${(s**3).toFixed(4)}, Surface Area: ${(6*s**2).toFixed(4)}`; } else if(shape==='cylinder'){ const r=parseFloat(document.getElementById('threed-radius').value); const h=parseFloat(document.getElementById('threed-height').value); if(isNaN(r)||r<=0||isNaN(h)||h<=0) result='Enter positive radius & height.'; else result=`Volume: ${(Math.PI*r**2*h).toFixed(4)}, Surface Area: ${(2*Math.PI*r*(r+h)).toFixed(4)}`; } document.getElementById('threed-result').textContent=result; }
+    const financeInputs={ loan:[{id:'amount',label:'Loan Amount',type:'number'},{id:'rate',label:'Annual Interest Rate (%)',type:'number'},{id:'years',label:'Years',type:'number'}], compound:[{id:'principal',label:'Principal Amount',type:'number'},{id:'rate',label:'Annual Interest Rate (%)',type:'number'},{id:'years',label:'Years',type:'number'},{id:'frequency',label:'Compoundings/Year',type:'number'}] };
+    function renderFinanceInputs(){ const ftype=document.getElementById('finance-type').value; const container=document.getElementById('finance-inputs'); container.innerHTML=''; financeInputs[ftype].forEach(inp=>{ container.innerHTML+=`<input id="finance-${inp.id}" type="${inp.type}" step="any" placeholder="${inp.label}" style="width:100%; margin-bottom:.4rem; border-radius:6px; border:1px solid #ccc; padding:.35rem .6rem;">`; }); }
+    document.getElementById('finance-type').addEventListener('change', renderFinanceInputs); renderFinanceInputs();
+    function calcFinance(){ const ftype=document.getElementById('finance-type').value; let result=''; if(ftype==='loan'){ const P=parseFloat(document.getElementById('finance-amount').value); const r=parseFloat(document.getElementById('finance-rate').value)/100/12; const n=parseFloat(document.getElementById('finance-years').value)*12; if(isNaN(P)||isNaN(r)||isNaN(n)||P<=0||r<=0||n<=0) result='Enter all values as positive numbers.'; else{ const payment=(P*r)/(1-Math.pow(1+r,-n)); result=`Monthly Payment: $${payment.toFixed(2)}`; } } else if(ftype==='compound'){ const P=parseFloat(document.getElementById('finance-principal').value); const r=parseFloat(document.getElementById('finance-rate').value)/100; const t=parseFloat(document.getElementById('finance-years').value); const n=parseFloat(document.getElementById('finance-frequency').value); if(isNaN(P)||isNaN(r)||isNaN(t)||isNaN(n)||P<=0||r<=0||t<=0||n<=0) result='Enter all values as positive numbers.'; else{ const A=P*Math.pow(1+r/n,n*t); result=`Future Value: $${A.toFixed(2)}`; } } document.getElementById('finance-result').textContent=result; }
   </script>
 
   <script>
-(function() {
-  // Map tab type to path
-  const tabIds = ['basic', 'graphing', 'geometry', '3d', 'finance'];
-  const tabPaths = {
-    basic: '/',
-    graphing: '/graphing/',
-    geometry: '/geometry/',
-    '3d': '/3D/',
-    finance: '/finance/'
-  };
+  (function () {
+    'use strict';
+    function $(sel, root = document){ return root.querySelector(sel); }
+    function create(tag, attrs = {}){ const el=document.createElement(tag); for(const k in attrs){ if(k==='class') el.className=attrs[k]; else if(k==='text') el.textContent=attrs[k]; else if(k==='html') el.innerHTML=attrs[k]; else el.setAttribute(k, attrs[k]); } return el; }
+    const STORAGE_KEY='basiccalc_current_user';
+    function loadUser(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)); }catch{ return null; } }
+    function saveUser(user){ localStorage.setItem(STORAGE_KEY, JSON.stringify(user)); }
+    function clearUser(){ localStorage.removeItem(STORAGE_KEY); }
 
-  // Map path to tab type
-  function getTabTypeFromPath(path) {
-    path = path.toLowerCase();
-    if (path === '/graphing/') return 'graphing';
-    if (path === '/geometry/') return 'geometry';
-    if (path === '/3d/' || path === '/3D/') return '3d';
-    if (path === '/finance/') return 'finance';
-    return 'basic';
-  }
+    function ready(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
 
-  // Patch showCalc to update url
-  const origShowCalc = window.showCalc;
-  window.showCalc = function(type, push = true) {
-    origShowCalc(type);
-    if (push) {
-      const path = tabPaths[type];
-      if (window.location.pathname !== path) {
-        window.history.pushState({calc: type}, '', path);
+    ready(function init(){
+      const nav = $('nav.navbar') || document.querySelector('nav') || null;
+      let calcRoot = document.getElementById('calculatorContainer');
+      if(!calcRoot){
+        const f = document.querySelector('.calculator-container');
+        if(f){ f.id='calculatorContainer'; calcRoot=f; }
       }
-    }
-  };
+      let authPage = document.getElementById('authPage');
+      if(!authPage){ authPage = create('div',{id:'authPage'}); authPage.style.display='none'; if(calcRoot && calcRoot.parentNode) calcRoot.parentNode.insertBefore(authPage, calcRoot.nextSibling); else document.body.appendChild(authPage); }
+      let navbarActions = document.getElementById('navbarActions') || document.querySelector('.navbar-actions');
+      if(!navbarActions){ navbarActions = create('div',{id:'navbarActions', class:'navbar-actions'}); if(nav) nav.appendChild(navbarActions); else document.body.appendChild(navbarActions); }
 
-  // On popstate, switch tab
-  window.addEventListener('popstate', function() {
-    const type = getTabTypeFromPath(window.location.pathname);
-    window.showCalc(type, false);
-  });
+      let themeBtn = document.getElementById('themeToggleBtn');
+      if(!themeBtn){ themeBtn = create('button',{id:'themeToggleBtn', class:'theme-toggle-btn', title:'Toggle theme'}); const icon=create('span',{id:'themeIcon', text:'🌙'}); themeBtn.appendChild(icon); navbarActions.appendChild(themeBtn); }
+      else{ if(!navbarActions.contains(themeBtn)) navbarActions.insertBefore(themeBtn, navbarActions.firstChild); if(!document.getElementById('themeIcon')) { const icon=create('span',{id:'themeIcon', text:'🌙'}); themeBtn.appendChild(icon); } }
 
-  // On page load, show tab for url
-  document.addEventListener('DOMContentLoaded', function() {
-    const type = getTabTypeFromPath(window.location.pathname);
-    window.showCalc(type, false);
-    window.history.replaceState({calc: type}, '', tabPaths[type]);
-  });
-})();
-</script>
+      function ensureNavBtn(id,text,clickHandler){ let btn=document.getElementById(id); if(!btn){ btn=create('button',{id, class:'navbar-btn', text}); btn.style.fontFamily="'Arial Black', ariblk, Arial, sans-serif"; btn.addEventListener('click', clickHandler); navbarActions.appendChild(btn); } else { btn.style.fontFamily="'Arial Black', ariblk, Arial, sans-serif"; btn.onclick=clickHandler; btn.style.display=''; } return btn; }
 
-<script>
-function goToBasic() {
-  if (typeof showCalc === "function") {
-    showCalc('basic');
-  }
-}
-document.addEventListener('DOMContentLoaded', function() {
-  var logo = document.querySelector('.navbar-logo');
-  var title = document.querySelector('.navbar-title');
-  if (logo) logo.style.cursor = "pointer";
-  if (title) title.style.cursor = "pointer";
-  if (logo) logo.onclick = goToBasic;
-  if (title) title.onclick = goToBasic;
-});
-</script>
+      const signinBtn = ensureNavBtn('signinBtn','Sign In',()=>routeTo('/signin/'));
+      const signupBtn = ensureNavBtn('signupBtn','Sign Up',()=>routeTo('/signup/'));
+      const logoutBtn = ensureNavBtn('logoutBtn','Log Out', logout);
+      logoutBtn.style.display='none';
 
-<script>
-const tabSEO = {
-  basic: { title: "Basic Calculator", description: "Basic Calculator – a free, easy-to-use tool for quick and simple calculations. Perfect for algebra, homework, and fast math!" },
-  graphing: { title: "Graphing Calculator", description: "Graphing Calculator – a free, easy-to-use tool to plot and visualize equations. Perfect for students, teachers, and anyone exploring functions and graphs!" },
-  geometry: { title: "Geometry Calculator", description: "Geometry Calculator – a free, easy-to-use tool for calculating areas, perimeters, and volumes. Perfect for homework, school projects, and quick geometry tasks!" },
-  '3d': { title: "3D Calculator", description: "3D Calculator – a free, easy-to-use tool to calculate volumes and surface areas of 3D shapes. Perfect for math projects, engineering tasks, and learning!" },
-  finance: { title: "Finance Calculator", description: "Finance Calculator – a free, easy-to-use tool for loans, investments, and interest calculations. Perfect for budgeting, planning, and managing your finances!" }
-};
+      let currentUser = loadUser();
+      function updateNavbarAuthState(){ if(currentUser){ signinBtn.style.display='none'; signupBtn.style.display='none'; logoutBtn.style.display=''; } else { signinBtn.style.display=''; signupBtn.style.display=''; logoutBtn.style.display='none'; } }
+      function loginUser(user){ currentUser=user; saveUser(user); updateNavbarAuthState(); }
+      function logout(){ currentUser=null; clearUser(); updateNavbarAuthState(); routeTo('/'); }
 
-// patch showCalc to update title & meta description
-const origShowCalc = window.showCalc;
-window.showCalc = function(type, push = true){
-  origShowCalc(type);
-  if(tabSEO[type]){
-    document.title = tabSEO[type].title;
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if(metaDesc) metaDesc.setAttribute('content', tabSEO[type].description);
-  }
-  if(push){
-    const path = tabPaths[type];
-    if(window.location.pathname !== path) window.history.pushState({calc:type}, '', path);
-  }
-};
-</script>
+      function routeTo(path){ try{ if(window.location.pathname!==path) window.history.pushState({},'',path); }catch(e){} renderPage(); }
+      window.addEventListener('popstate', renderPage);
 
-<!-- placeholder for auth pages (signin / signup) -->
-<div id="authPage" style="display:none"></div>
-<script src="auth-navbar.js"></script>
+      function renderPage(){
+        const path = window.location.pathname;
+        if(path==='/signin/'){ if(calcRoot) calcRoot.style.display='none'; authPage.style.display=''; renderSigninPage(); }
+        else if(path==='/signup/'){ if(calcRoot) calcRoot.style.display='none'; authPage.style.display=''; renderSignupPage(); }
+        else { if(calcRoot) calcRoot.style.display=''; authPage.style.display='none'; authPage.innerHTML=''; }
+        updateNavbarAuthState();
+      }
+
+      function renderSigninPage(){
+        authPage.innerHTML='';
+        const card = create('div',{class:'auth-page'});
+        const title = create('h2',{text:'Sign In'}); title.style.fontFamily="'Arial Black', ariblk, Arial, sans-serif"; title.style.color='#388e3c'; title.style.textAlign='center';
+        const form = create('form',{class:'auth-form', id:'signinForm'});
+        const email = create('input',{type:'text', id:'signinEmail', placeholder:'Email or Phone', autocomplete:'username'});
+        const pass = create('input',{type:'password', id:'signinPassword', placeholder:'Password', autocomplete:'current-password'});
+        [email,pass].forEach(i=>{ i.style.width='100%'; i.style.padding='.5rem'; i.style.marginBottom='.6rem'; i.style.borderRadius='8px'; i.style.border='1px solid #ccc'; i.style.boxSizing='border-box'; i.style.fontSize='1rem'; });
+        const err = create('div',{id:'signinError', class:'auth-error'}); err.style.color='red'; err.style.minHeight='1.2rem';
+        const submit = create('button',{type:'submit', text:'Sign In'}); submit.style.width='100%'; submit.style.padding='.6rem'; submit.style.borderRadius='8px'; submit.style.border='none'; submit.style.background='#4caf50'; submit.style.color='#fff'; submit.style.cursor='pointer';
+        form.appendChild(email); form.appendChild(pass); form.appendChild(err); form.appendChild(submit);
+        const socialWrap = create('div',{class:'auth-social'});
+        ['Google','Facebook','Apple'].forEach(provider=>{ const b=create('button',{type:'button', text:`Sign in with ${provider}`}); b.style.width='100%'; b.style.padding='.55rem'; b.style.borderRadius='8px'; b.style.border='1px solid #ddd'; b.style.marginTop='.45rem'; b.style.cursor='pointer'; b.addEventListener('click',()=>authSocial(provider)); socialWrap.appendChild(b); });
+        const switchLink = create('div',{class:'auth-switch-link', text:"Don't have an account? Sign Up"}); switchLink.style.textAlign='center'; switchLink.style.marginTop='.8rem'; switchLink.style.color='#4caf50'; switchLink.style.cursor='pointer'; switchLink.addEventListener('click',()=>routeTo('/signup/'));
+        card.appendChild(title); card.appendChild(form); card.appendChild(socialWrap); card.appendChild(switchLink); authPage.appendChild(card);
+        form.onsubmit=function(e){ e.preventDefault(); const em=(email.value||'').trim(); const pw=(pass.value||'').trim(); if(!em||!pw){ err.textContent='Please enter both email (or phone) and password.'; return; } loginUser({email:em}); routeTo('/'); };
+      }
+
+      function renderSignupPage(){
+        authPage.innerHTML='';
+        const card=create('div',{class:'auth-page'});
+        const title=create('h2',{text:'Sign Up'}); title.style.fontFamily="'Arial Black', ariblk, Arial, sans-serif"; title.style.color='#388e3c'; title.style.textAlign='center';
+        const socialTop=create('div',{class:'auth-social'}); const googleBtn=create('button',{type:'button', text:'Sign up with Google'}); googleBtn.style.width='100%'; googleBtn.style.padding='.6rem'; googleBtn.style.borderRadius='8px'; googleBtn.style.border='1px solid #ddd'; googleBtn.style.cursor='pointer'; googleBtn.addEventListener('click',()=>authSocial('Google')); socialTop.appendChild(googleBtn);
+        const or=create('div',{text:'— or create an account —'}); or.style.textAlign='center'; or.style.margin='0.8rem 0'; or.style.color='#666';
+        const form=create('form',{class:'auth-form', id:'signupForm'}); const email=create('input',{type:'text', id:'signupEmail', placeholder:'Email or Phone', autocomplete:'username'}); const pass=create('input',{type:'password', id:'signupPassword', placeholder:'Create Password', autocomplete:'new-password'}); const pass2=create('input',{type:'password', id:'signupConfirm', placeholder:'Confirm Password', autocomplete:'new-password'}); [email,pass,pass2].forEach(i=>{ i.style.width='100%'; i.style.padding='.5rem'; i.style.marginBottom='.6rem'; i.style.borderRadius='8px'; i.style.border='1px solid #ccc'; i.style.boxSizing='border-box'; i.style.fontSize='1rem'; });
+        const err=create('div',{id:'signupError', class:'auth-error'}); err.style.color='red'; err.style.minHeight='1.2rem';
+        const submit=create('button',{type:'submit', text:'Sign Up'}); submit.style.width='100%'; submit.style.padding='.6rem'; submit.style.borderRadius='8px'; submit.style.border='none'; submit.style.background='#4caf50'; submit.style.color='#fff'; submit.style.cursor='pointer';
+        form.appendChild(email); form.appendChild(pass); form.appendChild(pass2); form.appendChild(err); form.appendChild(submit);
+        const switchLink=create('div',{class:'auth-switch-link', text:'Already have an account? Sign In'}); switchLink.style.textAlign='center'; switchLink.style.marginTop='.6rem'; switchLink.style.color='#4caf50'; switchLink.style.cursor='pointer'; switchLink.addEventListener('click',()=>routeTo('/signin/'));
+        card.appendChild(title); card.appendChild(socialTop); card.appendChild(or); card.appendChild(form); card.appendChild(switchLink); authPage.appendChild(card);
+        form.onsubmit=function(e){ e.preventDefault(); const em=(email.value||'').trim(); const pw=(pass.value||'').trim(); const pw2=(pass2.value||'').trim(); if(!em||!pw||!pw2){ err.textContent='Please fill out all fields.'; return; } if(pw!==pw2){ err.textContent='Passwords do not match.'; return; } loginUser({email:em}); routeTo('/'); };
+      }
+
+      function authSocial(provider){ loginUser({email:provider+'User'}); routeTo('/'); }
+
+      window.routeTo = routeTo; window.logout = logout; window.authSocial = authSocial;
+      updateNavbarAuthState();
+      renderPage();
+    }); // ready
+  })();
+  </script>
 </body>
 </html>
